@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.regex.*;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -24,6 +25,9 @@ public class Main {
 
         int a = num1.trueValue();
         int b = num2.trueValue();
+        if (a<0 || a>10 || b<0 || b>10){
+            throw new Exception("throws Exception // вне диапазона от 0 до 10");
+        }
 
         int res = 0;
         String operator = arr[1];
@@ -62,30 +66,7 @@ class Number {
     String literalValue;
 
     boolean isRoman() {
-        switch (literalValue) {
-            case "I":
-                return true;
-            case "II":
-                return true;
-            case "III":
-                return true;
-            case "IV":
-                return true;
-            case "V":
-                return true;
-            case "VI":
-                return true;
-            case "VII":
-                return true;
-            case "VIII":
-                return true;
-            case "IX":
-                return true;
-            case "X":
-                return true;
-            default:
-                return false;
-        }
+        return Pattern.matches("[IVX]*", literalValue);
     }
     int trueValue () {
         switch (literalValue) {
@@ -115,7 +96,7 @@ class Number {
         }
     String getRomanValue(int num){
         int firstHalf = num / 10;
-        int secondHalf = num - firstHalf;
+        int secondHalf = num % 10;
         String firstHalfRoman = new String();
         String secondHalfRoman = new String();
         switch (firstHalf) {
